@@ -18,8 +18,8 @@ from uvcgan.utils.parsers import (
 def parse_cmdargs():
     parser = argparse.ArgumentParser(description = 'Translate images')
 
-    add_standard_eval_parsers(parser, default_n_eval = 100)
-    add_plot_extension_parser(parser)
+    add_standard_eval_parsers(parser, default_n_eval = None)
+    add_plot_extension_parser(parser, default = ('png', ))
 
     return parser.parse_args()
 
@@ -49,9 +49,6 @@ def plot_images(model, it_val, n_eval, batch_size, plotdir, ext):
 
     for name in model.images:
         os.makedirs(os.path.join(plotdir, name), exist_ok = True)
-
-    if isinstance(ext, str):
-        ext = [ ext, ]
 
     sample_counter = collections.defaultdict(int)
 
