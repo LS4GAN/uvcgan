@@ -1,7 +1,7 @@
 # Overview
 
 This package provides CycleGAN and model implementations used in the `uvcgan`
-paper.
+[paper][uvcgan_paper].
 
 `uvcgan` introduces an improved method to perform an unpaired image-to-image
 style transfer based on a CycleGAN framework. Combined with a new hybrid
@@ -12,9 +12,9 @@ transfer benchmarks.
 This README file provides brief instructions about how to setup the `uvcgan`
 package and reproduce results of the paper.
 
-The accompanying [Benchmarking](https://github.com/LS4GAN/benchmarking)
-repository contains detailed instructions how competing CycleGAN, CouncilGAN,
-ACL-GAN, and U-GAT-IT models were trained and evaluated.
+The accompanying [benchmarking][benchmarking_repo] repository contains detailed
+instructions how competing CycleGAN, CouncilGAN, ACL-GAN, and U-GAT-IT models
+were trained and evaluated.
 
 
 # Installation & Requirements
@@ -135,8 +135,8 @@ translate. The original and translated images will be saved under
 
 You can use [torch_fidelity](https://github.com/toshas/torch-fidelity) package
 to evaluate KID/FID metrics on the translated images. Please, refer to the
-accompanying [Benchmarking](https://github.com/LS4GAN/benchmarking) repository
-for the KID/FID evaluation details.
+accompanying [benchmarking][benchmarking_repo] repository for the KID/FID
+evaluation details.
 
 
 # F.A.Q.
@@ -171,4 +171,6 @@ copyright attribution.
 
 
 [cyclegan_repo]: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
+[benchmarking_repo]: https://github.com/LS4GAN/benchmarking
+[uvcgan_paper]: placeholder
 
