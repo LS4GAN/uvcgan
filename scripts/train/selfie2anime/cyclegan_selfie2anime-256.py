@@ -201,6 +201,7 @@ args_dict = {
     'outdir' : os.path.join(ROOT_OUTDIR, 'selfie2anime'),
     'log_level'  : 'DEBUG',
     'checkpoint' : 50,
+    'workers'    : 1,
 }
 
 train(args_dict)
