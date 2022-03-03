@@ -1,20 +1,20 @@
 # Overview
 
-This package provides CycleGAN and model implementations used in the `uvcgan`
-[paper][uvcgan_paper].
+This package provides CycleGAN and generator implementations used in the
+`uvcgan` [paper][uvcgan_paper].
 
 `uvcgan` introduces an improved method to perform an unpaired image-to-image
 style transfer based on a CycleGAN framework. Combined with a new hybrid
 generator architecture UNet-ViT (UNet-Vision Transformer) and a self-supervised
-pre-training, it achieves state-of-the art results on a multitude of style
+pre-training, it achieves state-of-the-art results on a multitude of style
 transfer benchmarks.
 
-This README file provides brief instructions about how to setup the `uvcgan`
-package and reproduce results of the paper.
+This README file provides brief instructions about how to set up the `uvcgan`
+package and reproduce the results of the paper.
 
 The accompanying [benchmarking][benchmarking_repo] repository contains detailed
-instructions how competing CycleGAN, CouncilGAN, ACL-GAN, and U-GAT-IT models
-were trained and evaluated.
+instructions on how competing CycleGAN, CouncilGAN, ACL-GAN, and U-GAT-IT
+models were trained and evaluated.
 
 
 # Installation & Requirements
@@ -48,7 +48,7 @@ and `./outdir` correspondingly.
 
 # UVCGAN Reproduction
 
-To reproduce the results of the `uvcgan` paper the following workflow is
+To reproduce the results of the `uvcgan` paper, the following workflow is
 suggested:
 
 1. Download CycleGAN datasets (`selfie2anime`, `celeba`).
@@ -56,7 +56,7 @@ suggested:
 3. Train CycleGAN models.
 4. Generate translated images and evaluate KID/FID scores.
 
-Below, we will provide the detailed instructions.
+Below, we will provide detailed instructions.
 
 ## 1. Download CycleGAN Datasets
 
@@ -74,8 +74,8 @@ datasets:
 ./scripts/download_dataset.sh celeba_all
 ```
 
-If you want to pre-train generators on the `ImageNet` dataset, manual download
-of the this dataset is required. More details about the origins of these
+If you want to pre-train generators on the `ImageNet` dataset, a manual
+download of this dataset is required. More details about the origins of these
 datasets can be found [here](doc/datasets.md).
 
 
@@ -133,9 +133,9 @@ where `-n` parameter controls the number of images from the test dataset to
 translate. The original and translated images will be saved under
 `PATH_TO_TRAINED_MODEL/evals/final/translated`
 
-You can use [torch_fidelity](https://github.com/toshas/torch-fidelity) package
-to evaluate KID/FID metrics on the translated images. Please, refer to the
-accompanying [benchmarking][benchmarking_repo] repository for the KID/FID
+You can use the [torch_fidelity](https://github.com/toshas/torch-fidelity)
+package to evaluate KID/FID metrics on the translated images. Please, refer to
+the accompanying [benchmarking][benchmarking_repo] repository for the KID/FID
 evaluation details.
 
 
@@ -145,17 +145,17 @@ evaluation details.
 
 You can specify GPUs that `pytorch` will use with the help of the
 `CUDA_VISIBLE_DEVICES` environment variable. This variable can be set to a list
-of comma separated GPU indices. When it is set, `pytorch` will only use GPUs
-which IDs are in the `CUDA_VISIBLE_DEVICES`.
+of comma-separated GPU indices. When it is set, `pytorch` will only use GPUs
+whose IDs are in the `CUDA_VISIBLE_DEVICES`.
 
 
 # Contributing
 
-All contributions are welcome. To ensure code consistency among diverse set of
-collaborators, `uvcgan` uses `pylint` linter that automatically identifies
+All contributions are welcome. To ensure code consistency among a diverse set
+of collaborators, `uvcgan` uses `pylint` linter that automatically identifies
 common code issues and ensures uniform code style.
 
-If your are submitting code changes, please run `pylint` tool over your code
+If you are submitting code changes, please run the `pylint` tool over your code
 and verify that there are no issues.
 
 # LICENSE
