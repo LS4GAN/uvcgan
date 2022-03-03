@@ -56,7 +56,9 @@ suggested:
 3. Train CycleGAN models.
 4. Generate translated images and evaluate KID/FID scores.
 
-Below, we will provide detailed instructions.
+We also provide pre-trained generators that were used to obtain the `uvcgan`
+[paper][uvcgan_paper] results. They can be found [here][pretrained_models].
+
 
 ## 1. Download CycleGAN Datasets
 
@@ -173,4 +175,5 @@ copyright attribution.
 [cyclegan_repo]: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
 [benchmarking_repo]: https://github.com/LS4GAN/benchmarking
 [uvcgan_paper]: placeholder
+[pretrained_models]: placeholder
 
