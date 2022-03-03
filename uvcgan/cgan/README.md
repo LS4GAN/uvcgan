@@ -8,9 +8,6 @@ summarize them below.
 ## Domains
 
 I have hardcoded existence of only two domains --  domain `a` and domain `b`.
-Domain `a` is what we refer to as "Fake", or "Quasi-1D", or "Simulation".
-Domain `b` is what we refer to as "Real", or "2D", or "Data".
-
 
 ## Images
 
@@ -32,3 +29,4 @@ conventions of the images:
   `real_a` -> `fake_b` -> `reco_a`.
 
 * `reco_b` -- reconstructed image in domain `b`.
+
