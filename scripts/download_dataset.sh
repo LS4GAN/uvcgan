@@ -90,6 +90,17 @@ download_anime2selfie ()
     local zip="selfie2anime.zip"
 
     download_and_extract_zip "${url}" "${zip}" "${CHECKSUMS[selfie2anime]}"
+
+    # CouncilGAN mangled dataset
+    local path="${DATADIR}/selfie2anime"
+
+    exec_or_die mv "${path}/trainA" "${path}/tmp"
+    exec_or_die mv "${path}/trainB" "${path}/trainA"
+    exec_or_die mv "${path}/tmp"    "${path}/trainB"
+
+    exec_or_die mv "${path}/testA" "${path}/tmp"
+    exec_or_die mv "${path}/testB" "${path}/testA"
+    exec_or_die mv "${path}/tmp"   "${path}/testB"
 }
 
 download_male2female ()
