@@ -10,7 +10,7 @@ declare -A URL_LIST=(
 )
 
 declare -A CHECKSUMS=(
-    [selfie2anime]="c2a79b0bccc640042413adf3113a384415058ec4065c2fd8aff646f08af12b86"
+    [selfie2anime]="2e8fe7563088971696d29af9f5153772733ac879c155c709b1aad741735ad7bc"
     [male2female]="97178617b01af691b68f0b97de142c6be3331803b79906666fc9ab76f454a18e"
     [glasses]="f4f141469fb8955822042d0999adcc81ec40db875c9bc930b733915b2089613f"
 )
@@ -45,7 +45,7 @@ exec_or_die ()
 calc_sha256_hash ()
 {
     local path="${1}"
-    sha256sum "${path}" | cut  -d ' ' -f | tr -d '\n'
+    sha256sum "${path}" | cut -d ' ' -f 1 | tr -d '\n'
 }
 
 download_archive ()
@@ -69,7 +69,6 @@ download_archive ()
 
         [[ "${test_csum}" == "${checksum}" ]] || \
             die "Checksum mismatch for '${path}' ${test_csum} vs ${checksum}"
-
     fi
 }
 
@@ -79,7 +78,7 @@ download_and_extract_zip ()
     local zip="${2}"
     local checksum="${3}"
 
-    download_archive  "${url}" "${zip}"
+    download_archive  "${url}" "${zip}" "${checksum}"
     exec_or_die unzip "${DATADIR}/${zip}" -d "${DATADIR}"
 
     # exec_or_die rm "${dst}/${zip}"
