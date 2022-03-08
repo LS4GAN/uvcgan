@@ -184,18 +184,13 @@ download_celeba_all ()
 
     local unzipped_path="${path}/celeba_male2female"
 
-    exec_or_die mkdir -p "${path}/train" "${path}/test"
+    exec_or_die mkdir -p "${path}/train" "${path}/val"
 
-    move_files "${path}/train" \
-        "${unzipped_path}/trainA" "${unzipped_path}/trainB"
+    exec_or_die mv "${unzipped_path}/trainA" "${unzipped_path}/trainB" \
+        "${path}/train/"
 
-    move_files "${path}/test" \
-        "${unzipped_path}/testA" "${unzipped_path}/testB"
-
-    for subdir in {trainA,trainB,testA,testB}
-    do
-        exec_or_die rmdir "${unzipped_path}/${subdir}"
-    done
+    exec_or_die mv "${unzipped_path}/testA" "${unzipped_path}/testB" \
+        "${path}/val"
 
     exec_or_die rmdir "${unzipped_path}"
 }
