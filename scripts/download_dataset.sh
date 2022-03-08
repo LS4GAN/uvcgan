@@ -84,16 +84,36 @@ download_and_extract_zip ()
     # exec_or_die rm "${dst}/${zip}"
 }
 
+check_dset_exists ()
+{
+    local path="${1}"
+
+    if [[ -e "${path}" ]]
+    then
+
+        read -r -p "Dataset '${path}' exists. Overwrite? [yN]: " ret
+        case "${ret}" in
+            [Yy])
+                exec_or_die rm -rf "${path}"
+                ;;
+            *)
+                exit 0
+                ;;
+        esac
+    fi
+}
+
 download_anime2selfie ()
 {
     local url="${URL_LIST["selfie2anime"]}"
     local zip="selfie2anime.zip"
+    local path="${DATADIR}/selfie2anime"
+
+    check_dset_exists "${path}"
 
     download_and_extract_zip "${url}" "${zip}" "${CHECKSUMS[selfie2anime]}"
 
     # CouncilGAN mangled dataset
-    local path="${DATADIR}/selfie2anime"
-
     exec_or_die mv "${path}/trainA" "${path}/tmp"
     exec_or_die mv "${path}/trainB" "${path}/trainA"
     exec_or_die mv "${path}/tmp"    "${path}/trainB"
@@ -107,7 +127,9 @@ download_male2female ()
 {
     local url="${URL_LIST["male2female"]}"
     local zip="male2female.zip"
+    local path="${DATADIR}/celeba_male2female"
 
+    check_dset_exists "${path}"
     download_and_extract_zip "${url}" "${zip}" "${CHECKSUMS[male2female]}"
 }
 
@@ -125,7 +147,9 @@ download_glasses ()
 {
     local url="${URL_LIST["glasses"]}"
     local zip="glasses.zip"
+    local path="${DATADIR}/celeba_glasses"
 
+    check_dset_exists "${path}"
     download_and_extract_zip "${url}" "${zip}" "${CHECKSUMS[glasses]}"
 
     local dset_dir="${DATADIR}/glasses"
@@ -143,7 +167,7 @@ download_glasses ()
         done
     done
 
-    exec_or_die mv "${dset_dir}" "${DATADIR}/celeba_glasses"
+    exec_or_die mv "${dset_dir}" "${path}"
 }
 
 download_celeba_all ()
@@ -151,19 +175,21 @@ download_celeba_all ()
     # NOTE: This dset is simply restructured male2female
     local url="${URL_LIST["male2female"]}"
     local zip="male2female.zip"
-    local dset_dir="${DATADIR}/celeba_all"
+    local path="${DATADIR}/celeba_all"
 
+    check_dset_exists "${path}"
     download_archive "${url}" "${zip}" "${CHECKSUMS[male2female]}"
-    exec_or_die unzip "${DATADIR}/${zip}" -d "${dset_dir}"
 
-    local unzipped_path="${dset_dir}/celeba_male2female"
+    exec_or_die unzip "${DATADIR}/${zip}" -d "${path}"
 
-    exec_or_die mkdir -p "${dset_dir}/train" "${dset_dir}/test"
+    local unzipped_path="${path}/celeba_male2female"
 
-    move_files "${dset_dir}/train" \
+    exec_or_die mkdir -p "${path}/train" "${path}/test"
+
+    move_files "${path}/train" \
         "${unzipped_path}/trainA" "${unzipped_path}/trainB"
 
-    move_files "${dset_dir}/test" \
+    move_files "${path}/test" \
         "${unzipped_path}/testA" "${unzipped_path}/testB"
 
     for subdir in {trainA,trainB,testA,testB}
