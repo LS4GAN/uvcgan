@@ -174,6 +174,6 @@ copyright attribution.
 
 [cyclegan_repo]: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
 [benchmarking_repo]: https://github.com/LS4GAN/benchmarking
-[uvcgan_paper]: placeholder
-[pretrained_models]: placeholder
+[uvcgan_paper]: https://arxiv.org/abs/2203.02557
+[pretrained_models]: https://zenodo.org/record/6336010
 
