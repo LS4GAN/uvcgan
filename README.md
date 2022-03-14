@@ -16,6 +16,7 @@ The accompanying [benchmarking][benchmarking_repo] repository contains detailed
 instructions on how competing CycleGAN, CouncilGAN, ACL-GAN, and U-GAT-IT
 models were trained and evaluated.
 
+![benchmark_grid](https://user-images.githubusercontent.com/22546248/156432283-39390ec5-28a0-41d9-8674-b7d15a46e692.jpg)
 
 # Installation & Requirements
 
