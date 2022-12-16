@@ -1,43 +1,39 @@
-import argparse
-import os
 import torch
+from torch.utils.data import DataLoader
+import numpy as np
 import matplotlib.pyplot as plt
-from uvcgan import ROOT_OUTDIR
+from torchvision import transforms
 from uvcgan.torch.funcs import get_torch_device_smart, seed_everything
 from uvcgan.config import Args
 from uvcgan.cgan import construct_model
-from torch.utils.data import DataLoader, Dataset
-from uvcgan.data.datasets import CycleGANDataset
-import torchvision.transforms as transforms
-import numpy as np
+from uvcgan.data.datasets.cyclegan import CycleGANDataset
 
-def load_gen_ab(model_path, device, epoch):
-    
-        args   = Args.load(model_path)
-        model = construct_model(
-        args.savedir, args.config, is_train = False, device = device
-        )
-        if epoch == -1:
-            epoch = max(model.find_last_checkpoint_epoch(), 0)
+def load_gen_ab(checkpoint_epoch):
+    args   = Args.load(model_path)
+    model = construct_model(
+    args.savedir, args.config, is_train = False, device = device
+    )
+    if checkpoint_epoch == -1:
+        checkpoint_epoch = max(model.find_last_checkpoint_epoch(), 0)
 
-        print("Load checkpoint at epoch %s" % epoch)
+    print("Load checkpoint at epoch %s" % checkpoint_epoch)
 
-        seed_everything(args.config.seed)
-        model.load(epoch)
-        gen_ab = model.models.gen_ab
-        return gen_ab
+    seed_everything(args.config.seed)
+    model.load(checkpoint_epoch)
+    gen_ab = model.models.gen_ab
+    return gen_ab
 
 def making_predictions(train_dataloader,gen_ab):
-        gen_ab.eval()
-        for (inputA, inputB) in train_dataloader:
-            with torch.no_grad():
-                features = gen_ab(inputA)
-            file = features.detach().cpu().numpy()
-            file_save = file.squeeze()
-            plt.imsave(
-                "<path_to_save_translated_files>",
-                np.array(file_save),
-                cmap='gray')  
+    gen_ab.eval()
+    for (inputA, _) in train_dataloader:
+        with torch.no_grad():
+            features = gen_ab(inputA)
+        file = features.detach().cpu().numpy()
+        file_save = file.squeeze()
+        plt.imsave(
+            "<path_to_save_translated_files>",
+            np.array(file_save),
+            cmap='gray')
 
 def create_data_loader():
     # Change or add transformations as per your needs
@@ -46,7 +42,7 @@ def create_data_loader():
         transforms.Grayscale(num_output_channels=1),
         transforms.ToTensor()
     ]
-    ds = Dataset(
+    ds = CycleGANDataset(
         "<path_to_your_data>",
         is_train=False,
         transform = transforms.Compose(transformations))
@@ -54,12 +50,12 @@ def create_data_loader():
     return dl
 
 if __name__ == '__main__':
-  batch_size=32
-  epoch = 200
-  device = get_torch_device_smart()
-  # Specify the path of your model trained through UVCGAN.
-  model_path = "<path_to_saved_model>"
-  model = load_gen_ab(model_path, device, epoch)
-  dl = create_data_loader()
-  making_predictions(dl,model)
-  print("Finish")
+    batch_size=32
+    epoch = 200
+    device = get_torch_device_smart()
+    # Specify the path of your model trained through UVCGAN.
+    model_path = "<path_to_saved_model>"
+    trained_model = load_gen_ab(epoch)
+    dataloader = create_data_loader()
+    making_predictions(dataloader,trained_model)
+    print("Finish")
