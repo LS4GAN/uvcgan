@@ -8,8 +8,8 @@ from uvcgan.config import Args
 from uvcgan.cgan import construct_model
 from uvcgan.data.datasets.cyclegan import CycleGANDataset
 
-def load_gen_ab(checkpoint_epoch):
-    args   = Args.load(model_path)
+def load_gen_ab(model_pth, checkpoint_epoch):
+    args   = Args.load(model_pth)
     model = construct_model(
     args.savedir, args.config, is_train = False, device = device
     )
@@ -35,7 +35,7 @@ def making_predictions(train_dataloader,gen_ab):
             np.array(file_save),
             cmap='gray')
 
-def create_data_loader():
+def create_data_loader(data_pth, batch_size):
     # Change or add transformations as per your needs
     transformations = [
         transforms.CenterCrop((224,224)),
@@ -43,19 +43,22 @@ def create_data_loader():
         transforms.ToTensor()
     ]
     ds = CycleGANDataset(
-        "<path_to_your_data>",
+        data_pth,
         is_train=False,
         transform = transforms.Compose(transformations))
     dl = DataLoader(ds, batch_size=batch_size,shuffle=False)
     return dl
 
 if __name__ == '__main__':
-    batch_size=32
-    epoch = 200
+    hyper_params = {
+        'batch_size': 32,
+        'epoch': 200
+    }
     device = get_torch_device_smart()
     # Specify the path of your model trained through UVCGAN.
+    data_path = "<path_to_your_data>"
     model_path = "<path_to_saved_model>"
-    trained_model = load_gen_ab(epoch)
-    dataloader = create_data_loader()
+    trained_model = load_gen_ab(model_path, hyper_params.epoch)
+    dataloader = create_data_loader(data_path, hyper_params.batch_size)
     making_predictions(dataloader,trained_model)
     print("Finish")
