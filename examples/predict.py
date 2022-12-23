@@ -1,3 +1,8 @@
+
+# Copyright (c) 2022 Shaikh Muhammad Uzair Noman <s.uzairnoman@gmail.com>
+
+# BSD 2-Clause License
+
 import torch
 from torch.utils.data import DataLoader
 import numpy as np

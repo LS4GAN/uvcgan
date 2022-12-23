@@ -1,0 +1,3 @@
+# Predictions
+
+If you wish to make predictions using the model already saved in your outdir folder, you can take help from `examples/predict.py`. This file provide an example code to translate your source images to target images. You would need to specify the paths as directed in the example code. Lastly, you can get your images in array format which you can save in image formats such as .jpg or in nifti format.
