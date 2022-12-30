@@ -142,6 +142,12 @@ the accompanying [benchmarking][benchmarking_repo] repository for the KID/FID
 evaluation details.
 
 
+# Additional Examples
+
+The additional usage examples can be found in the `examples` subdirectory of
+the `uvcgan` package.
+
+
 # F.A.Q.
 
 ## I am training my model on a multi-GPU node. How to make sure that I use only one GPU?
