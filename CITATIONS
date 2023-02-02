@@ -1,0 +1,14 @@
+@software{uvcgan_software,
+  author  = {Torbunov, Dmitrii and Huang, Yi and Yu, Haiwang and Huang, Jin and Yoo, Shinjae and Lin, Meifeng and Viren, Brett and Ren, Yihui},
+  title   = {uvcgan},
+  url     = {https://github.com/ls4gan/uvcgan},
+  version = {0.0.1},
+  year    = {2022}
+}
+@inproceedings{torbunov2023uvcgan,
+  title     = {Uvcgan: Unet vision transformer cycle-consistent gan for unpaired image-to-image translation},
+  author    = {Torbunov, Dmitrii and Huang, Yi and Yu, Haiwang and Huang, Jin and Yoo, Shinjae and Lin, Meifeng and Viren, Brett and Ren, Yihui},
+  booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision},
+  pages     = {702--712},
+  year      = {2023}
+}
