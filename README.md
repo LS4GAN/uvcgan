@@ -178,6 +178,17 @@ This code is also licensed under `BSD-2` license (please refer to
 [pytorch-CycleGAN-and-pix2pix][cyclegan_repo] has a note about proper
 copyright attribution.
 
+# Citation
+If you use this code for your research, please cite our paper.
+```
+@inproceedings{torbunov2023uvcgan,
+  title     = {Uvcgan: Unet vision transformer cycle-consistent gan for unpaired image-to-image translation},
+  author    = {Torbunov, Dmitrii and Huang, Yi and Yu, Haiwang and Huang, Jin and Yoo, Shinjae and Lin, Meifeng and Viren, Brett and Ren, Yihui},
+  booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision},
+  pages     = {702--712},
+  year      = {2023}
+}
+```
 
 [cyclegan_repo]: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
 [benchmarking_repo]: https://github.com/LS4GAN/benchmarking
