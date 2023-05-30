@@ -16,6 +16,10 @@ The accompanying [benchmarking][benchmarking_repo] repository contains detailed
 instructions on how competing CycleGAN, CouncilGAN, ACL-GAN, and U-GAT-IT
 models were trained and evaluated.
 
+For anyone interested in applying `uvcgan` over a scientific dataset, we
+publish a tutorial/demonstration of applying the `uvcgan` over the neutrino
+data at [uvcgan4slats](https://github.com/LS4GAN/uvcgan4slats).
+
 ![benchmark_grid](https://user-images.githubusercontent.com/22546248/156432283-39390ec5-28a0-41d9-8674-b7d15a46e692.jpg)
 
 # Installation & Requirements
