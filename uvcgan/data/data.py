@@ -3,11 +3,12 @@ import torch
 
 import torchvision
 
-from uvcgan.consts      import ROOT_DATA
-from .datasets.celeba   import CelebaDataset
-from .datasets.cyclegan import CycleGANDataset
-from .transforms        import select_transform
-from .utils             import imbalanced_collate
+from uvcgan.consts         import ROOT_DATA
+from .datasets.celeba      import CelebaDataset
+from .datasets.cyclegan    import CycleGANDataset
+from .datasets.cyclegan_v2 import CycleGANv2Dataset
+from .transforms           import select_transform
+from .utils                import imbalanced_collate
 
 def worker_init_fn(_worker_id):
     worker_seed = torch.initial_seed() % 2**32
@@ -25,6 +26,18 @@ def load_cyclegan_datasets(transform_train, transform_val, path, **data_args):
         path, transform = transform_train, is_train = True, **data_args
     )
     dset_val = CycleGANDataset(
+        path, transform = transform_val, is_train = False, **data_args
+    )
+
+    return (dset_train, dset_val)
+
+def load_cyclegan_v2_datasets(
+    transform_train, transform_val, path, **data_args
+):
+    dset_train = CycleGANv2Dataset(
+        path, transform = transform_train, is_train = True, **data_args
+    )
+    dset_val = CycleGANv2Dataset(
         path, transform = transform_val, is_train = False, **data_args
     )
 
@@ -73,6 +86,11 @@ def select_datasets(
 
     if dataset == 'cyclegan':
         return load_cyclegan_datasets(
+            transform_train, transform_val, path, **dataset_args
+        )
+
+    if dataset == 'cyclegan-v2':
+        return load_cyclegan_v2_datasets(
             transform_train, transform_val, path, **dataset_args
         )
 
