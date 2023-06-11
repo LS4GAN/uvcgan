@@ -36,7 +36,7 @@ def plot_model_images(plotdir, sample_counter, model, ext):
 
             image = tensor_to_image(torch_image[index])
             image = (255 * image).astype(np.uint8)
-            image = Image.fromarray(image)
+            image = Image.fromarray(np.squeeze(image))
 
             for e in ext:
                 image.save(path + '.' + e)
