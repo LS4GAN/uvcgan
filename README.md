@@ -22,6 +22,12 @@ data at [uvcgan4slats](https://github.com/LS4GAN/uvcgan4slats).
 
 ![benchmark_grid](https://user-images.githubusercontent.com/22546248/156432283-39390ec5-28a0-41d9-8674-b7d15a46e692.jpg)
 
+NOTE: The default cyclegan dataset implementation automatically converts
+grayscale images into RGB. If you like to apply `uvcgan` to a grayscale
+dataset, consider replacing the `cyclegan` dataset implementation with a
+`cyclegan-v2` (introduced in d54411c79a0ce49a74ecb48b41a7bb11ffe2b385).
+
+
 # Installation & Requirements
 
 ## Requirements
