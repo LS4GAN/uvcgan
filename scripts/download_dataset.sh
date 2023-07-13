@@ -169,26 +169,30 @@ move_files ()
 download_celeba_all ()
 {
     # NOTE: This dset is simply restructured male2female
-    local url="${URL_LIST["male2female"]}"
-    local zip="male2female.zip"
     local path="${DATADIR}/celeba_all"
+    local path_m2f="${DATADIR}/celeba_male2female"
 
+    cat <<EOF
+'celeba_all' is constructed from the 'celeba_male2female' dataset.
+
+Please make sure that the 'celeba_male2female' is available by running
+$ scripts/download_dataset.sh male2female
+
+EOF
     check_dset_exists "${path}"
-    download_archive "${url}" "${zip}" "${CHECKSUMS[male2female]}"
 
-    exec_or_die unzip "${DATADIR}/${zip}" -d "${path}"
-
-    local unzipped_path="${path}/celeba_male2female"
+    [[ -e "${path_m2f}" ]] \
+        || die "'celeba_male2female' is not found under '${path_m2f}'"
 
     exec_or_die mkdir -p "${path}/train" "${path}/val"
 
-    exec_or_die mv "${unzipped_path}/trainA" "${unzipped_path}/trainB" \
+    echo "Copying files..."
+
+    exec_or_die cp -r "${path_m2f}/trainA" "${path_m2f}/trainB" \
         "${path}/train/"
 
-    exec_or_die mv "${unzipped_path}/testA" "${unzipped_path}/testB" \
+    exec_or_die cp -r "${path_m2f}/testA" "${path_m2f}/testB" \
         "${path}/val"
-
-    exec_or_die rmdir "${unzipped_path}"
 }
 
 dataset="${1}"
