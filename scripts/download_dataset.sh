@@ -5,14 +5,14 @@ DATADIR="${UVCGAN_DATA:-data}"
 # Source: https://github.com/Onr/Council-GAN/blob/master/scripts/download.sh
 declare -A URL_LIST=(
     [selfie2anime]="https://www.dropbox.com/s/9lz6gwwwyyxpdnn/selfie2anime.zip"
-    [male2female]="https://cgm.technion.ac.il/Computer-Graphics-Multimedia/CouncilGAN/DataSet/celeba_male2female.zip"
-    [glasses]="https://cgm.technion.ac.il/Computer-Graphics-Multimedia/CouncilGAN/DataSet/celeba_glasses.zip"
+#    [male2female]="https://cgm.technion.ac.il/Computer-Graphics-Multimedia/CouncilGAN/DataSet/celeba_male2female.zip"
+#    [glasses]="https://cgm.technion.ac.il/Computer-Graphics-Multimedia/CouncilGAN/DataSet/celeba_glasses.zip"
 )
 
 declare -A CHECKSUMS=(
     [selfie2anime]="2e8fe7563088971696d29af9f5153772733ac879c155c709b1aad741735ad7bc"
-    [male2female]="97178617b01af691b68f0b97de142c6be3331803b79906666fc9ab76f454a18e"
-    [glasses]="f4f141469fb8955822042d0999adcc81ec40db875c9bc930b733915b2089613f"
+#    [male2female]="97178617b01af691b68f0b97de142c6be3331803b79906666fc9ab76f454a18e"
+#    [glasses]="f4f141469fb8955822042d0999adcc81ec40db875c9bc930b733915b2089613f"
 )
 
 die ()
@@ -35,6 +35,26 @@ EOF
     else
         exit 0
     fi
+}
+
+celeba_banner ()
+{
+    local dest="${1}"
+
+    cat <<EOF
+[NOTE] As of June 2023, the download links to the reference CouncilGAN's
+CelebA datasets are no longer working. To use the CelebA datasets for I2I
+translation, one needs to recreate them.
+
+Please refer to https://github.com/LS4GAN/celeba4cyclegan for instructions
+on how to do that.
+
+Once the dataset is recreated, save it as
+
+'${dest}'
+
+to make it visible to 'uvcgan'.
+EOF
 }
 
 exec_or_die ()
@@ -126,12 +146,14 @@ download_anime2selfie ()
 
 download_male2female ()
 {
-    local url="${URL_LIST["male2female"]}"
-    local zip="male2female.zip"
     local path="${DATADIR}/celeba_male2female"
+    celeba_banner "${path}"
+}
 
-    check_dset_exists "${path}"
-    download_and_extract_zip "${url}" "${zip}" "${CHECKSUMS[male2female]}"
+download_glasses ()
+{
+    local path="${DATADIR}/celeba_glasses"
+    celeba_banner "${path}"
 }
 
 move_files ()
@@ -142,33 +164,6 @@ move_files ()
 
     # NOTE: too many mv calls. Maybe optimize with xargs
     exec_or_die find "${src[@]}" -type f -exec mv '{}' "${dst}/" \;
-}
-
-download_glasses ()
-{
-    local url="${URL_LIST["glasses"]}"
-    local zip="glasses.zip"
-    local path="${DATADIR}/celeba_glasses"
-
-    check_dset_exists "${path}"
-    download_and_extract_zip "${url}" "${zip}" "${CHECKSUMS[glasses]}"
-
-    local dset_dir="${DATADIR}/glasses"
-
-    for subdir in {trainA,trainB,testA,testB}
-    do
-        echo "Restructuring directory: '${subdir}'"
-        for splitdir in {1,2}
-        do
-            local src="${dset_dir}/${subdir}/${splitdir}"
-            local dst="${dset_dir}/${subdir}/"
-
-            move_files "${dst}" "${src}"
-            exec_or_die rmdir "${src}"
-        done
-    done
-
-    exec_or_die mv "${dset_dir}" "${path}"
 }
 
 download_celeba_all ()
