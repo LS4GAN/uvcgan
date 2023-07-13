@@ -55,10 +55,10 @@ def create_data_loader(data_path, batch_size):
     return dl
 
 if __name__ == '__main__':
-    BATCH_SIZE = 32
-    EPOCH = 200
-    DEVICE = get_torch_device_smart()
-    DATA_PATH = "<path_to_your_data>"
+    BATCH_SIZE = 1
+    EPOCH      = -1
+    DEVICE     = get_torch_device_smart()
+    DATA_PATH  = "<path_to_your_data>"
     # Specify the path of your model trained through UVCGAN.
     MODEL_PATH = "<path_to_saved_model>"
     trained_model = load_gen_ab(MODEL_PATH, EPOCH, DEVICE)
