@@ -76,6 +76,11 @@ We also provide pre-trained generators that were used to obtain the `uvcgan`
 `uvcgan` provides a script (`scripts/download_dataset.sh`) to download and
 unpack various CycleGAN datasets.
 
+**NOTE**: As of June 2023, the CelebA datasets (`male2female` and `glasses`)
+need to be recreated manually. Please refer to
+[celeba4cyclegan](https://github.com/LS4GAN/celeba4cyclegan) for instructions
+on how to do that.
+
 For example, one can use the following commands to download `selfie2anime`,
 CelebA `male2female`, CelebA `eyeglasses`, and the un-partitioned CelebA
 datasets:
