@@ -52,34 +52,38 @@ from the `uvcgan` source tree.
 If a conda environment is not possible, please use the following procedure
 to set up a virtural environment.
 
-**Step 1:** install `virtualenv` (if you haven't done so) by
-```
-pip install virtualenv
-```
+**IMPORTANT NOTE:** The following approach only works for python3.{7,8},
+so please make sure you have a properly version of python installed
+before proceeding. A python version that is too high will cause
+pip installing `torch1.9.0` and `torchvision1.10.0` as specified in
+`requirements.txt` to fail. However, we need the specific versions of
+`torch` and `torchvision` for reproducibility.
 
-**Step 2:** from the `uvcgan` source tree, run
+From now on, let us assume that you have python3.8 installed.
+
+**Step 1:** from the `uvcgan` source tree, run
 ```
-virtualenv venv
+python3.8 -m venv venv
 ```
 This will create a virtual environment named `venv` under `uvcgan` source tree.
 
-**Step 3:** from the `uvcgan` source tree, active the virtual environment
+**Step 2:** from the `uvcgan` source tree, active the virtual environment
 by running
 ```
 source venv/bin/activate
 ```
 
-**Step 4:** install required packages by running
+**Step 3:** install required packages by running
 ```
 pip install -r requirements.txt
 ```
 
-**Step 5:** install the `uvcgan` package by running
+**Step 4:** install the `uvcgan` package by running
 ```
 python setup.py develop
 ```
 
-**Step 6:** when you are done with working `uvcgan`, exit
+**Step 5:** when you are done working with `uvcgan`, exit
 the virtual environment by running
 ```
 deactivate
