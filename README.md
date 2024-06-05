@@ -47,6 +47,45 @@ python setup.py develop --user
 ```
 from the `uvcgan` source tree.
 
+
+## Work with a virtual environment
+If a conda environment is not possible, please use the following procedure
+to set up a virtural environment.
+
+**Step 1:** install `virtualenv` (if you haven't done so) by
+```
+pip install virtualenv
+```
+
+**Step 2:** from the `uvcgan` source tree, run
+```
+virtualenv venv
+```
+This will create a virtual environment named `venv` under `uvcgan` source tree.
+
+**Step 3:** from the `uvcgan` source tree, active the virtual environment
+by running
+```
+source venv/bin/activate
+```
+
+**Step 4:** install required packages by running
+```
+pip install -r requirements.txt
+```
+
+**Step 5:** install the `uvcgan` package by running
+```
+python setup.py develop
+```
+
+**Step 6:** when you are done with working `uvcgan`, exit
+the virtual environment by running
+```
+deactivate
+```
+
+
 ## Environment Setup
 
 `uvcgan` extensively uses two environment variables `UVCGAN_DATA` and
