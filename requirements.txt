@@ -2,9 +2,6 @@
 # uvcgan/uvcgan/data/datasets/cyclegan_v2.py: 1
 Pillow
 
-# uvcgan/examples/predict.py: 9
-matplotlib
-
 # uvcgan/examples/predict.py: 8
 # uvcgan/scripts/translate_images.py: 8
 # uvcgan/uvcgan/data/datasets/celeba.py: 2
@@ -27,14 +24,14 @@ setuptools
 # uvcgan/uvcgan/data/datasets/celeba.py: 5
 # uvcgan/uvcgan/data/datasets/cyclegan.py: 4
 # uvcgan/uvcgan/data/utils.py: 1
-torch
+torch == 1.9.0
 
 # uvcgan/examples/predict.py: 10
 # uvcgan/uvcgan/data/data.py: 4
 # uvcgan/uvcgan/data/datasets/cyclegan.py: 5
 # uvcgan/uvcgan/data/datasets/funcs.py: 1
 # uvcgan/uvcgan/data/transforms.py: 1,2
-torchvision
+torchvision == 0.10.0
 
 # uvcgan/scripts/translate_images.py: 7
 # uvcgan/uvcgan/train/train.py: 2
