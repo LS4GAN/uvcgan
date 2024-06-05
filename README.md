@@ -48,43 +48,6 @@ python setup.py develop --user
 from the `uvcgan` source tree.
 
 
-## Work with a virtual environment
-If a conda environment is not possible, please use the following procedure
-to set up a virtural environment.
-
-**Step 1:** install `virtualenv` (if you haven't done so) by
-```
-pip install virtualenv
-```
-
-**Step 2:** from the `uvcgan` source tree, run
-```
-virtualenv venv
-```
-This will create a virtual environment named `venv` under `uvcgan` source tree.
-
-**Step 3:** from the `uvcgan` source tree, active the virtual environment
-by running
-```
-source venv/bin/activate
-```
-
-**Step 4:** install required packages by running
-```
-pip install -r requirements.txt
-```
-
-**Step 5:** install the `uvcgan` package by running
-```
-python setup.py develop
-```
-
-**Step 6:** when you are done with working `uvcgan`, exit
-the virtual environment by running
-```
-deactivate
-```
-
 
 ## Environment Setup
 
@@ -141,7 +104,7 @@ datasets can be found [here](doc/datasets.md).
 To pre-train CycleGAN generators in a BERT-like setup one can use the
 following three scripts:
 ```
-scripts/train/anime2selfie/bert_anime2selfie-256.py
+scripts/train/selfie2anime/bert_selfie2anime-256.py
 scripts/train/bert_imagenet/bert_imagenet-256.py
 scripts/train/celeba/bert_celeba_preproc-256.py
 ```
@@ -149,7 +112,7 @@ scripts/train/celeba/bert_celeba_preproc-256.py
 All three scripts have similar invocation. For example, to pre-train generators
 on the `selfie2anime` dataset one can run:
 ```
-python scripts/train/anime2selfie/bert_anime2selfie-256.py
+python scripts/train/selfie2anime/bert_selfie2anime-256.py
 ```
 You can find more details by looking over the scripts, which contain training
 configuration and are rather self-explanatory.
@@ -163,7 +126,7 @@ directory.
 Similarly to the generator pre-training, `uvcgan` provides two scripts to
 train the CycleGAN models:
 ```
-scripts/train/anime2selfie/cyclegan_anime2selfie-256.py
+scripts/train/selfie2anime/cyclegan_selfie2anime-256.py
 scripts/train/celeba/cyclegan_celeba_preproc-256.py
 ```
 
